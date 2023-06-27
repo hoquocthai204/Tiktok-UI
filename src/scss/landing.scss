@@ -1,0 +1,173 @@
+.landing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .landing__item-container {
+        padding: 20px 0;
+        display: flex;
+        max-width: 692px;
+
+        .landing__item-image-container {
+            width: 56px;
+            height: 56px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 50px;
+
+            .landing__item-image {
+                position: absolute;
+                width: 100%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .landing__item-content-container {
+            margin-left: 12px;
+
+            .landing__item-content {
+                display: flex;
+
+                .landing-item__left-side {
+                    width: 510px;
+
+                    .landing__author-container {
+                        .landing__author-title {
+                            font-weight: 700;
+                            font-size: 18px;
+                            line-height: 25px;
+                            margin-right: 4px;
+                        }
+
+                        .landing__author-name {
+                            font-weight: 400;
+                            font-size: 14px;
+                            line-height: 28px;
+                        }
+                    }
+                    .landing__author-description-container {
+                        .landing__author-description {
+                        }
+
+                        .landing__tag-list {
+                            a {
+                                font-size: 16px;
+                                line-height: 22px;
+                                word-break: break-word;
+                                text-decoration: none;
+                                color: rgba(22, 24, 35, 1);
+                                font-weight: 600;
+                                cursor: pointer;
+
+                                + a {
+                                    margin-left: 5px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .landing-item__right-side {
+                    .landing__item-option {
+                        min-height: 28px;
+                        font-size: 16px;
+                        line-height: 22px;
+                        font-weight: 600;
+                        border-radius: 4px;
+                        background-color: transparent;
+                        color: rgba(254, 44, 85, 1);
+                        border: 1px solid rgba(254, 44, 85, 1);
+                        cursor: pointer;
+                        min-width: 88px;
+                        margin-left: 26px;
+                        margin-top: 7px;
+
+                        &:hover {
+                            background-color: rgba(254, 44, 85, 0.06);
+                        }
+                    }
+                }
+            }
+
+            .landing__item-music-container {
+                margin-top: 4px;
+                margin-bottom: 12px;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 22px;
+
+                a {
+                    text-decoration: none;
+                    color: rgba(22, 24, 35, 1);
+                    display: flex;
+                    align-items: center;
+
+                    .landing__music-link {
+                        margin-right: 5px;
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            .landing__item-video-wrapper {
+                display: flex;
+                align-items: flex-end;
+                gap: 20px;
+
+                .landing__video-container {
+                    background-color: yellowgreen;
+                    max-width: 600px;
+                    max-height: 500px;
+                    border-radius: 8px;
+
+                    video {
+                        // width: 100%;
+                        // height: 100%;
+                        width: 400px;
+                        height: 500px;
+                        object-fit: contain;
+                    }
+                }
+
+                .landing__video-option-container {
+                    display: flex;
+                    flex-direction: column;
+
+                    .landing__option-box {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        cursor: pointer;
+
+                        .landing__video-option {
+                            margin-top: 8px;
+                            margin-bottom: 6px;
+                            width: 48px;
+                            height: 48px;
+                            font-size: 0px;
+                            border-radius: 50%;
+                            transition: all 0.2s ease-in-out 0s;
+                            background-color: rgba(22, 24, 35, 0.06);
+                            border: none;
+                            cursor: pointer;
+
+                            i {
+                                font-size: 24px;
+                            }
+                        }
+
+                        .landing__option-amount {
+                            color: rgba(22, 24, 35, 0.75);
+                            font-size: 12px;
+                            line-height: 17px;
+                            text-align: center;
+                            font-weight: bold;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
