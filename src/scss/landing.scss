@@ -1,4 +1,5 @@
-.landing {
+.landing,
+.following {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,9 +49,6 @@
                         }
                     }
                     .landing__author-description-container {
-                        .landing__author-description {
-                        }
-
                         .landing__tag-list {
                             a {
                                 font-size: 16px;
@@ -121,6 +119,7 @@
                     max-width: 600px;
                     max-height: 500px;
                     border-radius: 8px;
+                    overflow: hidden;
 
                     video {
                         // width: 100%;
@@ -169,5 +168,22 @@
                 }
             }
         }
+
+        + .landing__item-container {
+            border-top: 1px solid #d3d4d6;
+        }
     }
+}
+
+// --------- RESPONSIVE ---------
+/* Mobile*/
+@media only screen and (max-width: 46.1875em) {
+}
+
+/* Tablet */
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+}
+
+/* PC */
+@media only screen and (min-width: 64em) {
 }

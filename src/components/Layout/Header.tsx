@@ -1,17 +1,94 @@
-import React, { useState } from 'react';
-import { MessageHeaderIcon, InboxIcon, SearchHeaderIcon, TimeIcon } from '../Icons';
+import mainAvatar from '@/assets/images/main_avatar.png';
 import mainLogo from '@/assets/images/tiktok_logo.svg.png';
+import { menuPopupData, menuPopupDataUnauth } from '@/constants/common/menuPopupData';
 import Divider from '@mui/material/Divider';
+import { Button, Modal, Popover } from 'antd';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+    EllipsisMenuIcon,
+    InboxIcon,
+    MessageHeaderIcon,
+    PlusIcon,
+    SearchHeaderIcon,
+    TimeIcon,
+} from '../Icons';
+import { useDispatch } from 'react-redux';
+import { authState, setIsLoggedIn } from '@/features/auth/authSlice';
+import { useSelector } from 'react-redux';
+import LoginPopup from '@/features/auth/components/LoginPopup';
 
 type Props = {};
 
 const Header = (props: Props) => {
     const [inputContent, setInputContent] = useState<string>('');
+    const [showLogoutModal, setShowLogoutModal] = useState(false);
+    const [openLoginPopup, setOpenLoginPopup] = useState(false);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const isLoggedIn = useSelector(authState).isLoggedIn;
 
     const handleCleanSearch = () => {
         setInputContent('');
+    };
+
+    const handleSelectMenu = (key: string) => {
+        switch (key) {
+            case 'logout':
+                setShowLogoutModal(true);
+                break;
+
+            case 'profile':
+                navigate('profile');
+                break;
+            default:
+                break;
+        }
+    };
+
+    const moreMenuContent = (
+        <ul className="other-menu__option-container">
+            {menuPopupData.map((e, index) => (
+                <>
+                    {e.divider && <Divider />}
+                    <li
+                        key={index}
+                        className="other-menu__option"
+                        onClick={() => handleSelectMenu(e.key)}
+                    >
+                        <e.icon />
+                        <span>{e.text}</span>
+                    </li>
+                </>
+            ))}
+        </ul>
+    );
+
+    const moreMenuContentUnauth = (
+        <ul className="other-menu__option-container">
+            {menuPopupDataUnauth.map((e, index) => (
+                <>
+                    <li
+                        key={index}
+                        className="other-menu__option"
+                        onClick={() => handleSelectMenu(e.key)}
+                    >
+                        <e.icon />
+                        <span>{e.text}</span>
+                    </li>
+                </>
+            ))}
+        </ul>
+    );
+
+    const handleLogout = () => {
+        dispatch(setIsLoggedIn(false));
+        setShowLogoutModal(false);
+    };
+
+    const handleLogin = () => {
+        // dispatch(setIsLoggedIn(true));
+        setOpenLoginPopup(true);
     };
 
     return (
@@ -40,32 +117,58 @@ const Header = (props: Props) => {
 
             <div className="header__options">
                 <button
-                    className="header-option header-option__upload"
+                    className="header-option header-option__button"
                     onClick={() => navigate('upload')}
                 >
-                    <span>
-                        <svg
-                            className="tiktok-qeydvm-StyledPlusIcon e18d3d945"
-                            width="1em"
-                            data-e2e=""
-                            height="1em"
-                            viewBox="0 0 16 16"
-                            fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                d="M8 2.5C7.58579 2.5 7.25 2.83579 7.25 3.25V7.25H3.25C2.83579 7.25 2.5 7.58579 2.5 8C2.5 8.41421 2.83579 8.75 3.25 8.75H7.25V12.75C7.25 13.1642 7.58579 13.5 8 13.5C8.41421 13.5 8.75 13.1642 8.75 12.75V8.75H12.75C13.1642 8.75 13.5 8.41421 13.5 8C13.5 7.58579 13.1642 7.25 12.75 7.25H8.75V3.25C8.75 2.83579 8.41421 2.5 8 2.5Z"
-                            ></path>
-                        </svg>
-                    </span>{' '}
-                    Upload
+                    <PlusIcon /> Upload
                 </button>
-                <MessageHeaderIcon className="header-option header-option__message" />
-                <InboxIcon className="header-option header-option__inbox" />
-                <div className="header-option header-option__more-menu"></div>
+                {isLoggedIn ? (
+                    <>
+                        <MessageHeaderIcon className="header-option header-option__message" />
+                        <InboxIcon className="header-option header-option__inbox" />
+                        <Popover
+                            content={moreMenuContent}
+                            placement="bottomRight"
+                            className="header-option header-option__more-menu"
+                        >
+                            <img src={mainAvatar} alt="avatar" />
+                        </Popover>
+                    </>
+                ) : (
+                    <>
+                        <Button
+                            className="header-option header-option__button--red"
+                            onClick={handleLogin}
+                        >
+                            Log in
+                        </Button>
+                        <Popover
+                            content={moreMenuContentUnauth}
+                            placement="bottomRight"
+                            className="header-option header-option__more-menu--unauth"
+                        >
+                            <EllipsisMenuIcon className="header-option header-option__other-menu" />
+                        </Popover>
+                    </>
+                )}
             </div>
+
+            <Modal
+                open={showLogoutModal}
+                onOk={() => setShowLogoutModal(false)}
+                onCancel={() => setShowLogoutModal(false)}
+                footer={[<Button>hello</Button>]}
+                centered
+                className="header__logout-container"
+            >
+                <p className="header__logout-title">Are you sure you want to log out?</p>
+                <div className="header__logout-options">
+                    <button onClick={() => setShowLogoutModal(false)}>Cancel</button>
+                    <button onClick={handleLogout}>Log out</button>
+                </div>
+            </Modal>
+
+            <LoginPopup setOpen={setOpenLoginPopup} open={openLoginPopup} />
         </div>
     );
 };

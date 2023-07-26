@@ -1,11 +1,11 @@
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import ItemContent from '@/features/landing/components/ItemContent';
+import ItemImage from '@/features/landing/components/ItemImage';
+import VideoContainer from '@/features/landing/components/VideoContainer';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
 
-import ItemContent from '../components/ItemContent';
-import ItemImage from '../components/ItemImage';
-import VideoContainer from '../components/VideoContainer';
-
-interface LandingProps {}
+interface FollowingPageProps {}
 
 const tagData = [
     'kienthucofficial',
@@ -16,9 +16,9 @@ const tagData = [
     'meovat',
 ];
 
-const LandingPage: React.FunctionComponent<LandingProps> = (props) => {
+const FollowingPage: React.FunctionComponent<FollowingPageProps> = (props) => {
     return (
-        <div className="landing">
+        <div className="following">
             {[1, 2, 3, 4].map((e) => (
                 <div className="landing__item-container">
                     <ItemImage
@@ -32,6 +32,7 @@ const LandingPage: React.FunctionComponent<LandingProps> = (props) => {
                             title={'reviewcuocsongs'}
                             name={'Review Cuộc Sống'}
                             description={'đi chợ sẽ gặp'}
+                            isFollowing
                         />
 
                         <div className="landing__item-music-container">
@@ -54,4 +55,4 @@ const LandingPage: React.FunctionComponent<LandingProps> = (props) => {
     );
 };
 
-export default LandingPage;
+export default FollowingPage;

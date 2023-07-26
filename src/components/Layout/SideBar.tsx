@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { CameraIcon, CompassIcon, FollowingIcon, HomeIcon } from '../Icons';
+import { CameraIcon, CompassIcon, FollowingIcon, HomeIcon, SidebarBannerIcon } from '../Icons';
 import { Divider } from '@mui/material';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AccountCard from '../Common/AccountCard';
@@ -9,14 +9,19 @@ import {
     sidebarFooterLinkGroup2,
     sidebarFooterLinkGroup3,
 } from '@/constants/common/sidebarFooterLink';
+import { useSelector } from 'react-redux';
+import { authState, setIsLoggedIn } from '@/features/auth/authSlice';
+import { Button } from 'antd';
+import { useDispatch } from 'react-redux';
 
 type Props = {};
 
 const SideBar = (props: Props) => {
     const navigate = useNavigate();
     const location = useLocation();
-
+    const isLoggedIn = useSelector(authState).isLoggedIn;
     const [itemSelected, setItemSelected] = useState<string>('');
+    const dispatch = useDispatch();
 
     const handleSelect = (val: string) => {
         setItemSelected(val);
@@ -60,6 +65,10 @@ const SideBar = (props: Props) => {
             setItemSelected(location.pathname.slice(1));
     }, [location.pathname]);
 
+    const handleLogin = () => {
+        dispatch(setIsLoggedIn(true));
+    };
+
     return (
         <div className="sidebar">
             <ul className="sidebar__menu-container">
@@ -85,63 +94,89 @@ const SideBar = (props: Props) => {
                     </li>
                 ))}
             </ul>
-            <Divider />
-            <div className="sidebar__account-list">
-                <p className="sidebar__account-title">Suggested accounts</p>
 
-                <ul>
-                    {[1, 2].map((val, index) => (
-                        <li key={index} className="sidebar__account-item">
-                            <AccountCard
-                                image={accoutLogo}
-                                name={'theanh28entertainment'}
-                                subname={'Theanh28 Entertainment'}
-                            />
-                        </li>
-                    ))}
-                </ul>
-                <button className="sidebar__more" onClick={handleSuggestMore}>
-                    See all
-                </button>
-            </div>
-            <Divider />
-            <div className="sidebar__account-list">
-                <p className="sidebar__account-title">Following accounts</p>
+            <Divider style={{ width: '224px' }} />
 
-                <ul>
-                    {[1, 2].map((val, index) => (
-                        <li key={index} className="sidebar__account-item">
-                            <AccountCard
-                                image={accoutLogo}
-                                name={'theanh28entertainment'}
-                                subname={'Theanh28 Entertainment'}
-                            />
-                        </li>
-                    ))}
-                </ul>
-                <button className="sidebar__more" onClick={handleFollowingMore}>
-                    See more
-                </button>
-            </div>
-            <Divider />
+            {isLoggedIn ? (
+                <>
+                    <div className="sidebar__account-list">
+                        <p className="sidebar__account-title">Suggested accounts</p>
+
+                        <ul>
+                            {[1, 2].map((val, index) => (
+                                <li key={index} className="sidebar__account-item">
+                                    <AccountCard
+                                        image={accoutLogo}
+                                        name={'theanh28entertainment'}
+                                        subname={'Theanh28 Entertainment'}
+                                    />
+                                </li>
+                            ))}
+                        </ul>
+
+                        <button className="sidebar__more" onClick={handleSuggestMore}>
+                            See all
+                        </button>
+                    </div>
+
+                    <Divider style={{ width: '224px' }} />
+
+                    <div className="sidebar__account-list">
+                        <p className="sidebar__account-title">Following accounts</p>
+
+                        <ul>
+                            {[1, 2].map((val, index) => (
+                                <li key={index} className="sidebar__account-item">
+                                    <AccountCard
+                                        image={accoutLogo}
+                                        name={'theanh28entertainment'}
+                                        subname={'Theanh28 Entertainment'}
+                                    />
+                                </li>
+                            ))}
+                        </ul>
+                        <button className="sidebar__more" onClick={handleFollowingMore}>
+                            See more
+                        </button>
+                    </div>
+                </>
+            ) : (
+                <div className="sidebar__login-container">
+                    <span className="sidebar__login-title">
+                        Log in to follow creators, like videos, and view comments.
+                    </span>
+                    <Button className="sidebar__login-btn" onClick={handleLogin}>
+                        Log in
+                    </Button>
+                </div>
+            )}
+
+            <Divider style={{ width: '224px' }} />
+
             <div className="sidebar-footer">
+                <div className="sidebar-footer__banner">
+                    <p className="sidebar__banner-text">Create effects</p>
+                </div>
+
                 <div className="sidebar-footer__link-container">
                     {sidebarFooterLinkGroup1.map((val, index) => (
-                        <Link key={index} to={val.path} target="_blank" rel="noopener noreferrer">
+                        <Link key={index} to={val.path} rel="noopener noreferrer">
                             {val.text}
                         </Link>
                     ))}
                 </div>
+
                 <div className="sidebar-footer__link-container">
                     {sidebarFooterLinkGroup2.map((val, index) => (
-                        <Link key={index} to={val.path} target="_blank" rel="noopener noreferrer">
+                        <Link key={index} to={val.path} rel="noopener noreferrer">
                             {val.text}
                         </Link>
                     ))}
                 </div>
+
                 <div className="sidebar-footer__link-container">
                     {sidebarFooterLinkGroup3.map((val, index) => (
-                        <Link key={index} to={val.path} target="_blank" rel="noopener noreferrer">
+                        <Link key={index} to={val.path} rel="noopener noreferrer">
                             {val.text}
                         </Link>
                     ))}
