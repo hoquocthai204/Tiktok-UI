@@ -44,7 +44,7 @@ const ItemContent: React.FunctionComponent<ItemContentProps> = ({
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                #{val}
+                                {val}
                             </Link>
                         ))}
                     </div>

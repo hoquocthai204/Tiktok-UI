@@ -45,7 +45,10 @@ const VideoContainer: React.FunctionComponent<VideoContainerProps> = ({
         <div className="landing__item-video-wrapper">
             <div className="landing__video-container">
                 <video controls>
-                    <source src="" type="video/mp4" />
+                    <source
+                        src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
+                        type="video/mp4"
+                    />
                 </video>
             </div>
             <div className="landing__video-option-container">
