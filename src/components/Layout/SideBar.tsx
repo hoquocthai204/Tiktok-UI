@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import { authState, setIsLoggedIn } from '@/features/auth/authSlice';
 import { Button } from 'antd';
 import { useDispatch } from 'react-redux';
+import sidebarBannerLogo from '@/assets/images/sidebar_banner_logo.png';
 
 type Props = {};
 
@@ -95,7 +96,7 @@ const SideBar = (props: Props) => {
                 ))}
             </ul>
 
-            <Divider style={{ width: '224px' }} />
+            <Divider style={{ width: '224px' }} className="sidebar__divider" />
 
             {isLoggedIn ? (
                 <>
@@ -119,7 +120,7 @@ const SideBar = (props: Props) => {
                         </button>
                     </div>
 
-                    <Divider style={{ width: '224px' }} />
+                    <Divider style={{ width: '224px' }} className="sidebar__divider" />
 
                     <div className="sidebar__account-list">
                         <p className="sidebar__account-title">Following accounts</p>
@@ -151,11 +152,12 @@ const SideBar = (props: Props) => {
                 </div>
             )}
 
-            <Divider style={{ width: '224px' }} />
+            <Divider style={{ width: '224px' }} className="sidebar__divider" />
 
             <div className="sidebar-footer">
                 <div className="sidebar-footer__banner">
                     <p className="sidebar__banner-text">Create effects</p>
+                    <img src={sidebarBannerLogo} alt="" />
                 </div>
 
                 <div className="sidebar-footer__link-container">

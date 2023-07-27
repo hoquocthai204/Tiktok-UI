@@ -87,7 +87,6 @@ const Header = (props: Props) => {
     };
 
     const handleLogin = () => {
-        // dispatch(setIsLoggedIn(true));
         setOpenLoginPopup(true);
     };
 

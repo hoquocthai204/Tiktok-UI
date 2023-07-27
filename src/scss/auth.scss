@@ -32,12 +32,39 @@
     .login-container {
         width: 375px;
         margin: 0 auto;
+
         .login__header {
             color: rgb(22, 24, 35);
             font-size: 32px;
             margin: 16px auto;
             font-weight: bold;
             text-align: center;
+        }
+        .login__code-container {
+            width: 100%;
+            height: 208px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgb(242, 242, 242);
+            border-radius: 11px;
+
+            .login__qr-img {
+                width: 170px !important;
+                height: 170px !important;
+                padding: 12px;
+            }
+        }
+        .login__code-step-desc {
+            margin: 24px 0;
+
+            .login__step {
+                color: black;
+                font-weight: 600;
+                margin-bottom: 4px;
+                font-size: 16px;
+                line-height: 20px;
+            }
         }
         .login__option-container {
             .login__option {

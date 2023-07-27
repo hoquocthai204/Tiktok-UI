@@ -173,6 +173,93 @@
             border-top: 1px solid #d3d4d6;
         }
     }
+
+    .follow__container {
+        max-width: 736px;
+        padding: 20px 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+
+        .follow-card {
+            width: 226px;
+            height: 302px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+
+            .follow-card__background {
+                position: absolute;
+                width: 100%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: -1;
+            }
+
+            .follow-card__info-box {
+                display: flex;
+                height: 100%;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: center;
+                padding: 30px 12px 20px;
+
+                .follow-card__logo-container {
+                    position: relative;
+                    width: 48px;
+                    height: 48px;
+                    margin-bottom: 14px;
+                    border-radius: 50%;
+                    overflow: hidden;
+
+                    img {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        width: 100%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+                .follow-card__name {
+                    color: rgba(255, 255, 255, 1);
+                    font-weight: 700;
+                    font-size: 18px;
+                    line-height: 24px;
+                    letter-spacing: -0.028px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                .follow-card__subname {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    color: rgba(255, 255, 255, 1);
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 18px;
+                }
+                .follow-card__btn {
+                    margin-top: 8px;
+                    border-radius: 4px;
+                    border: none;
+                    color: rgba(255, 255, 255, 1);
+                    background-color: rgba(254, 44, 85, 1);
+                    min-width: 164px;
+                    min-height: 37px;
+                    font-size: 18px;
+                    line-height: 25px;
+                    font-weight: 600;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)),
+                            #fe2c55;
+                    }
+                }
+            }
+        }
+    }
 }
 
 // --------- RESPONSIVE ---------
