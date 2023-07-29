@@ -90,6 +90,10 @@ const Header = (props: Props) => {
         setOpenLoginPopup(true);
     };
 
+    const handleUpload = () => {
+        !isLoggedIn ? setOpenLoginPopup(true) : navigate('upload');
+    };
+
     return (
         <div className="header">
             <div className="header__image-container" onClick={() => navigate('')}>
@@ -115,12 +119,10 @@ const Header = (props: Props) => {
             </div>
 
             <div className="header__options">
-                <button
-                    className="header-option header-option__button"
-                    onClick={() => navigate('upload')}
-                >
+                <button className="header-option header-option__button" onClick={handleUpload}>
                     <PlusIcon /> Upload
                 </button>
+
                 {isLoggedIn ? (
                     <>
                         <MessageHeaderIcon className="header-option header-option__message" />
@@ -156,7 +158,6 @@ const Header = (props: Props) => {
                 open={showLogoutModal}
                 onOk={() => setShowLogoutModal(false)}
                 onCancel={() => setShowLogoutModal(false)}
-                footer={[<Button>hello</Button>]}
                 centered
                 className="header__logout-container"
             >

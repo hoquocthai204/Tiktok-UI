@@ -25,3 +25,8 @@ export * from './QrIcon';
 export * from './CloseIcon';
 export * from './TwitterIcon';
 export * from './BackIcon';
+export * from './EmbedIcon';
+export * from './WhatsAppIcon';
+export * from './CopyLinkIcon';
+export * from './SendIcon';
+export * from './DownIcon';

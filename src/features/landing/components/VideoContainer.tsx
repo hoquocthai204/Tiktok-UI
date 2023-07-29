@@ -5,6 +5,16 @@ import MessageIcon from '@mui/icons-material/Message';
 import { useSelector } from 'react-redux';
 import { authState } from '@/features/auth/authSlice';
 import LoginPopup from '@/features/auth/components/LoginPopup';
+import { Popover } from 'antd';
+import {
+    CopyLinkIcon,
+    DownIcon,
+    EmbedICon,
+    FacebookIcon,
+    SendIcon,
+    WhatsAppIcon,
+} from '@/components/Icons';
+import { shareOptionInfo } from '@/constants/landing/shareOptionInfo';
 
 interface VideoContainerProps {
     favoriteAmount: string;
@@ -41,6 +51,22 @@ const VideoContainer: React.FunctionComponent<VideoContainerProps> = ({
         }
     };
 
+    const sharePopoverContent = (
+        <div className="share-popover">
+            <ul className="share-popover__option-box">
+                {shareOptionInfo.map((val, index) => (
+                    <li key={val.key} className="share-popover__option">
+                        <val.icon /> {val.text}
+                    </li>
+                ))}
+            </ul>
+
+            <div className="share-popover__more">
+                <DownIcon />
+            </div>
+        </div>
+    );
+
     return (
         <div className="landing__item-video-wrapper">
             <div className="landing__video-container">
@@ -76,14 +102,19 @@ const VideoContainer: React.FunctionComponent<VideoContainerProps> = ({
                     <span className="landing__option-amount">{bookmarkAmount}</span>
                 </div>
 
-                <div className="landing__option-box" onClick={() => handleSelect('share')}>
+                <Popover
+                    className="landing__option-box"
+                    placement="topLeft"
+                    content={sharePopoverContent}
+                >
                     <button className="landing__video-option">
                         <i className="fa-solid fa-share"></i>
                     </button>
 
                     <span className="landing__option-amount">{shareAmount}</span>
-                </div>
+                </Popover>
             </div>
+
             <LoginPopup setOpen={setOpen} open={open} />
         </div>
     );

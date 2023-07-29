@@ -1,3 +1,43 @@
+.share-popover {
+    margin: -4px -12px;
+    width: 280px;
+    max-height: 448px;
+    overflow: auto;
+    .share-popover__option-box {
+        .share-popover__option {
+            padding: 11px 16px;
+            display: flex;
+            align-items: center;
+            margin: 0 3px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+
+            svg {
+                width: 26px;
+                height: 26px;
+                margin-right: 12px;
+            }
+
+            &:hover {
+                background-color: #16182308;
+            }
+        }
+    }
+    .share-popover__more {
+        margin: 0 4px;
+        padding: 0 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #16182308;
+        }
+    }
+}
+
 .landing,
 .following {
     display: flex;

@@ -1,6 +1,8 @@
 import * as React from 'react';
 
-interface FacebookIconProps {}
+interface FacebookIconProps {
+    [e: string]: any;
+}
 
 const FacebookIcon: React.FunctionComponent<FacebookIconProps> = (props) => {
     return (
@@ -11,6 +13,7 @@ const FacebookIcon: React.FunctionComponent<FacebookIconProps> = (props) => {
             viewBox="0 0 48 48"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            {...props}
         >
             <path
                 d="M24 47C36.7025 47 47 36.7025 47 24C47 11.2975 36.7025 1 24 1C11.2975 1 1 11.2975 1 24C1 36.7025 11.2975 47 24 47Z"
