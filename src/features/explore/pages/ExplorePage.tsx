@@ -15,7 +15,7 @@ const menuItems: MenuItem[] = [
 ];
 
 const ExplorePage: React.FunctionComponent<ExplorePageProps> = (props) => {
-    return <ListScrollMenu menuItems={menuItems} />;
+    return <>Coming soon</>;
 };
 
 export default ExplorePage;

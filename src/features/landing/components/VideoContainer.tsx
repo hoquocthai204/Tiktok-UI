@@ -1,20 +1,13 @@
-import React, { useState } from 'react';
+import { DownIcon } from '@/components/Icons';
+import { shareOptionInfo } from '@/constants/landing/shareOptionInfo';
+import { authState } from '@/features/auth/authSlice';
+import LoginPopup from '@/features/auth/components/LoginPopup';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MessageIcon from '@mui/icons-material/Message';
-import { useSelector } from 'react-redux';
-import { authState } from '@/features/auth/authSlice';
-import LoginPopup from '@/features/auth/components/LoginPopup';
 import { Popover } from 'antd';
-import {
-    CopyLinkIcon,
-    DownIcon,
-    EmbedICon,
-    FacebookIcon,
-    SendIcon,
-    WhatsAppIcon,
-} from '@/components/Icons';
-import { shareOptionInfo } from '@/constants/landing/shareOptionInfo';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 interface VideoContainerProps {
     favoriteAmount: string;
