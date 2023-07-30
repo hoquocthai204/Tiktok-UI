@@ -36,6 +36,19 @@
             background-color: #16182308;
         }
     }
+    &::-webkit-scrollbar {
+        width: 0;
+        transition: width 0.3s ease;
+    }
+
+    &:hover::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #1618230f;
+        border-radius: 50px;
+    }
 }
 
 .landing,

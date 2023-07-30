@@ -25,6 +25,7 @@ const VideoContainer: React.FunctionComponent<VideoContainerProps> = ({
     const [favorite, setFavorite] = React.useState<boolean>(false);
     const isLoggedIn = useSelector(authState).isLoggedIn;
     const [open, setOpen] = useState(false);
+    const [shareMore, setShareMore] = useState(false);
 
     const handleSelect = (val: string) => {
         switch (val) {
@@ -44,21 +45,39 @@ const VideoContainer: React.FunctionComponent<VideoContainerProps> = ({
         }
     };
 
+    const handleShareMore = () => {
+        setShareMore(true);
+    };
+
     const sharePopoverContent = (
         <div className="share-popover">
             <ul className="share-popover__option-box">
-                {shareOptionInfo.map((val, index) => (
-                    <li key={val.key} className="share-popover__option">
-                        <val.icon /> {val.text}
-                    </li>
-                ))}
+                {shareOptionInfo.map((val, index) =>
+                    !shareMore ? (
+                        index < 5 && (
+                            <li key={val.key} className="share-popover__option">
+                                <val.icon /> {val.text}
+                            </li>
+                        )
+                    ) : (
+                        <li key={val.key} className="share-popover__option">
+                            <val.icon /> {val.text}
+                        </li>
+                    ),
+                )}
             </ul>
 
-            <div className="share-popover__more">
-                <DownIcon />
-            </div>
+            {!shareMore && (
+                <div className="share-popover__more" onClick={handleShareMore}>
+                    <DownIcon />
+                </div>
+            )}
         </div>
     );
+
+    const handleShareChange = () => {
+        setShareMore(false);
+    };
 
     return (
         <div className="landing__item-video-wrapper">
@@ -99,6 +118,7 @@ const VideoContainer: React.FunctionComponent<VideoContainerProps> = ({
                     className="landing__option-box"
                     placement="topLeft"
                     content={sharePopoverContent}
+                    onOpenChange={handleShareChange}
                 >
                     <button className="landing__video-option">
                         <i className="fa-solid fa-share"></i>

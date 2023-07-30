@@ -1,6 +1,8 @@
 import * as React from 'react';
 
-interface TwitterIconProps {}
+interface TwitterIconProps {
+    [val: string]: any;
+}
 
 const TwitterIcon: React.FunctionComponent<TwitterIconProps> = (props) => {
     return (
@@ -11,6 +13,7 @@ const TwitterIcon: React.FunctionComponent<TwitterIconProps> = (props) => {
             viewBox="0 0 48 48"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            {...props}
         >
             <path
                 fillRule="evenodd"
