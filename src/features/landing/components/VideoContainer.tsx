@@ -52,7 +52,7 @@ const VideoContainer: React.FunctionComponent<VideoContainerProps> = ({
     const handleShare = (val: string) => {
         switch (val) {
             case 'friend':
-                setOpen(true);
+                !isLoggedIn && setOpen(true);
                 break;
 
             default:
@@ -75,7 +75,11 @@ const VideoContainer: React.FunctionComponent<VideoContainerProps> = ({
                             </li>
                         )
                     ) : (
-                        <li key={val.key} className="share-popover__option">
+                        <li
+                            key={val.key}
+                            className="share-popover__option"
+                            onClick={() => handleShare(val.key)}
+                        >
                             <val.icon /> {val.text}
                         </li>
                     ),
