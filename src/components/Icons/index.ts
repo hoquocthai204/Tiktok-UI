@@ -36,3 +36,7 @@ export * from './TelegramIcon';
 export * from './EmailIcon';
 export * from './LineIcon';
 export * from './PinterestIcon';
+export * from './PreviousShortcutIcon';
+export * from './NextShortcutIcon';
+export * from './LikeShortcutIcon';
+export * from './MuteShortcutIcon';

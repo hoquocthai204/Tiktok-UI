@@ -125,6 +125,51 @@
     }
 }
 
+.header-shortcut {
+    width: 400px !important;
+    height: 280px !important;
+    .ant-modal-content {
+        padding: 40px 32px 32px;
+    }
+    .ant-modal-close {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(22, 24, 35, 0.03);
+
+        .header-shortcut__close-btn {
+            font-size: 20px;
+        }
+    }
+    .header-shortcut__title {
+        font-weight: 700;
+        font-size: 24px;
+        letter-spacing: 0.24px;
+        height: 22px;
+        line-height: 22px;
+        text-align: center;
+        color: rgb(22, 24, 35);
+        white-space: nowrap;
+    }
+
+    .header-shortcut__items-container {
+        margin-top: 16px;
+        border-top: 1px solid rgba(22, 24, 35, 0.12);
+
+        .header-shortcut__item {
+            height: 40px;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 18px;
+            letter-spacing: 0.093px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(22, 24, 35, 0.12);
+        }
+    }
+}
+
 .layout {
     min-width: 1024px;
     .header {

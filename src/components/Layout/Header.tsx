@@ -1,11 +1,16 @@
 import mainAvatar from '@/assets/images/main_avatar.png';
 import mainLogo from '@/assets/images/tiktok_logo.svg.png';
 import { menuPopupData, menuPopupDataUnauth } from '@/constants/common/menuPopupData';
+import { shortcutDataItem } from '@/constants/common/shortcutDataItem';
+import { authState, setIsLoggedIn } from '@/features/auth/authSlice';
+import LoginPopup from '@/features/auth/components/LoginPopup';
 import Divider from '@mui/material/Divider';
 import { Button, Modal, Popover } from 'antd';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
+    CloseIcon,
     EllipsisMenuIcon,
     InboxIcon,
     MessageHeaderIcon,
@@ -13,10 +18,6 @@ import {
     SearchHeaderIcon,
     TimeIcon,
 } from '../Icons';
-import { useDispatch } from 'react-redux';
-import { authState, setIsLoggedIn } from '@/features/auth/authSlice';
-import { useSelector } from 'react-redux';
-import LoginPopup from '@/features/auth/components/LoginPopup';
 
 type Props = {};
 
@@ -27,6 +28,7 @@ const Header = (props: Props) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isLoggedIn = useSelector(authState).isLoggedIn;
+    const [showShortcut, setShowShortcut] = useState(false);
 
     const handleCleanSearch = () => {
         setInputContent('');
@@ -37,9 +39,11 @@ const Header = (props: Props) => {
             case 'logout':
                 setShowLogoutModal(true);
                 break;
-
             case 'profile':
                 navigate('profile');
+                break;
+            case 'shortcut':
+                setShowShortcut(true);
                 break;
             default:
                 break;
@@ -169,6 +173,26 @@ const Header = (props: Props) => {
             </Modal>
 
             <LoginPopup setOpen={setOpenLoginPopup} open={openLoginPopup} />
+
+            <Modal
+                open={showShortcut}
+                onOk={() => setShowShortcut(false)}
+                onCancel={() => setShowShortcut(false)}
+                centered
+                className="header-shortcut"
+                footer={[]}
+                closeIcon={<CloseIcon className={'header-shortcut__close-btn'} />}
+            >
+                <p className="header-shortcut__title">Keyboard shortcuts</p>
+                <ul className="header-shortcut__items-container">
+                    {shortcutDataItem.map((e) => (
+                        <li key={e.key} className="header-shortcut__item">
+                            {e.content}
+                            <e.icon />
+                        </li>
+                    ))}
+                </ul>
+            </Modal>
         </div>
     );
 };

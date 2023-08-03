@@ -49,13 +49,28 @@ const VideoContainer: React.FunctionComponent<VideoContainerProps> = ({
         setShareMore(true);
     };
 
+    const handleShare = (val: string) => {
+        switch (val) {
+            case 'friend':
+                setOpen(true);
+                break;
+
+            default:
+                break;
+        }
+    };
+
     const sharePopoverContent = (
         <div className="share-popover">
             <ul className="share-popover__option-box">
                 {shareOptionInfo.map((val, index) =>
                     !shareMore ? (
                         index < 5 && (
-                            <li key={val.key} className="share-popover__option">
+                            <li
+                                key={val.key}
+                                className="share-popover__option"
+                                onClick={() => handleShare(val.key)}
+                            >
                                 <val.icon /> {val.text}
                             </li>
                         )

@@ -19,6 +19,7 @@ const LandingPage: React.FunctionComponent<LandingProps> = (props) => {
                             'https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/4d28a01a2d7bafde5280021c451c5afd~c5_100x100.jpeg?x-expires=1690660800&x-signature=JPpaSLzOdtq4iit2G4%2BmM9bJGz0%3D'
                         }
                     />
+
                     <div className="landing__item-content-container">
                         <ItemContent
                             tagData={tagData}
