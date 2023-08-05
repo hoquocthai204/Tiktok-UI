@@ -168,18 +168,12 @@
                 gap: 20px;
 
                 .landing__video-container {
-                    background-color: yellowgreen;
-                    max-width: 600px;
-                    max-height: 500px;
-                    border-radius: 8px;
-                    overflow: hidden;
-
                     video {
-                        // width: 100%;
-                        // height: 100%;
-                        width: 400px;
-                        height: 500px;
-                        object-fit: contain;
+                        border-radius: 8px;
+                        width: 100%;
+                        height: 100%;
+                        max-width: 600px;
+                        // object-fit: contain;
                     }
                 }
 

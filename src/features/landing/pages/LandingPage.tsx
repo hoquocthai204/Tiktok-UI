@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import ItemContent from '../components/ItemContent';
 import ItemImage from '../components/ItemImage';
 import VideoContainer from '../components/VideoContainer';
+import cardLogo from '@/assets/images/card_logo1.png';
 
 interface LandingProps {}
 
@@ -14,11 +15,7 @@ const LandingPage: React.FunctionComponent<LandingProps> = (props) => {
         <div className="landing">
             {[1, 2, 3, 4].map((e) => (
                 <div className="landing__item-container">
-                    <ItemImage
-                        src={
-                            'https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/4d28a01a2d7bafde5280021c451c5afd~c5_100x100.jpeg?x-expires=1690660800&x-signature=JPpaSLzOdtq4iit2G4%2BmM9bJGz0%3D'
-                        }
-                    />
+                    <ItemImage src={cardLogo} />
 
                     <div className="landing__item-content-container">
                         <ItemContent

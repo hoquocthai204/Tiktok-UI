@@ -103,7 +103,7 @@ const VideoContainer: React.FunctionComponent<VideoContainerProps> = ({
             <div className="landing__video-container">
                 <video controls>
                     <source
-                        src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
+                        src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4"
                         type="video/mp4"
                     />
                 </video>
