@@ -6,7 +6,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MessageIcon from '@mui/icons-material/Message';
 import { Popover } from 'antd';
-import React, { useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 interface VideoContainerProps {
@@ -26,6 +26,9 @@ const VideoContainer: React.FunctionComponent<VideoContainerProps> = ({
     const isLoggedIn = useSelector(authState).isLoggedIn;
     const [open, setOpen] = useState(false);
     const [shareMore, setShareMore] = useState(false);
+    const videoRef = useRef<HTMLVideoElement | null>(null);
+    const [isVisible, setIsVisible] = useState(false);
+    const [currentVideo, setCurrentVideo] = useState<HTMLVideoElement | null>(null);
 
     const handleSelect = (val: string) => {
         switch (val) {
@@ -98,10 +101,55 @@ const VideoContainer: React.FunctionComponent<VideoContainerProps> = ({
         setShareMore(false);
     };
 
+    useEffect(() => {
+        const options: IntersectionObserverInit = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5,
+        };
+
+        const observer = new IntersectionObserver(handleIntersection, options);
+
+        if (videoRef.current) {
+            observer.observe(videoRef.current);
+        }
+
+        return () => {
+            if (videoRef.current) {
+                observer.unobserve(videoRef.current);
+            }
+        };
+    }, []);
+
+    const handleIntersection: IntersectionObserverCallback = (entries) => {
+        entries.forEach((entry) => {
+            setIsVisible(entry.isIntersecting && entry.intersectionRatio >= 0.5);
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                // Set the currently playing video to the new video that came into view
+                setCurrentVideo(videoRef.current);
+            }
+        });
+    };
+
+    useEffect(() => {
+        // Pause the old video when a new video starts playing
+        if (isVisible && currentVideo && currentVideo !== videoRef.current) {
+            currentVideo.pause();
+            currentVideo.currentTime = 0; // Reset to the beginning of the video
+        }
+
+        // Play or pause the video based on visibility state
+        if (isVisible && videoRef.current) {
+            videoRef.current.play();
+        } else if (!isVisible && videoRef.current) {
+            videoRef.current.pause();
+        }
+    }, [isVisible, currentVideo]);
+
     return (
         <div className="landing__item-video-wrapper">
             <div className="landing__video-container">
-                <video controls>
+                <video ref={videoRef} controls muted loop>
                     <source
                         src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4"
                         type="video/mp4"
